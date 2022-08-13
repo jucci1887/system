@@ -11,6 +11,7 @@ import (
 	"github.com/shirou/gopsutil/v3/cpu"
 	"github.com/shirou/gopsutil/v3/disk"
 	"github.com/shirou/gopsutil/v3/load"
+	"github.com/shirou/gopsutil/v3/mem"
 )
 
 type hardware struct {
@@ -79,5 +80,18 @@ func (h *hardware) DiskUsedPercent() (diskUsed float64) {
 	}
 
 	log.Logs.Error("Get hard disk stat error: ", err)
+	return
+}
+
+// 获取内存使用率
+func (h *hardware) RamUsed() (used float64) {
+
+	stat, err := mem.VirtualMemory()
+	if err == nil {
+		used = stat.UsedPercent
+		return
+	}
+
+	log.Logs.Error("Get memory usage error: ", err)
 	return
 }

@@ -18,15 +18,16 @@ func TestStringStart(t *testing.T) {
 }
 
 func TestHardware(t *testing.T) {
-	msg := "Get Hardware Info: "
 	free, used := system.Hardware.DiskState()
 	cpu := system.Hardware.CpuInfo()
 	avg := system.Hardware.CpuLoad()
+	ram := system.Hardware.RamUsed()
 
-	Test.T(t).Logs(msg).Ok(cpu)
-	Test.T(t).Logs(msg).Ok(avg.String())
-	Test.T(t).Logs(msg).Ok(free)
-	Test.T(t).Logs(msg).Ok(used)
+	Test.T(t).Logs("Cpu info: ").Ok(cpu)
+	Test.T(t).Logs("Cpu load avg: ").Ok(avg.String())
+	Test.T(t).Logs("Hard disk free space").Ok(free)
+	Test.T(t).Logs("Hard disk used: ").Ok(used)
+	Test.T(t).Logs("Ram used: ").Ok(ram)
 }
 
 func TestStringEnd(t *testing.T) {
