@@ -18,10 +18,10 @@ func TestStringStart(t *testing.T) {
 }
 
 func TestHardware(t *testing.T) {
-	free, used := system.Hardware.DiskState()
 	cpu := system.Hardware.CpuInfo()
 	avg := system.Hardware.CpuLoad()
 	ram := system.Hardware.RamUsed()
+	free, used := system.Hardware.DiskState()
 
 	Test.T(t).Logs("Cpu info: ").Ok(cpu)
 	Test.T(t).Logs("Cpu load avg: ").Ok(avg.String())

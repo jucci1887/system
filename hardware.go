@@ -15,13 +15,13 @@ import (
 )
 
 type hardware struct {
-	diskDirPath string
+	DirPath string
 }
 
 var Hardware = new(hardware)
 
 func init() {
-	Hardware.diskDirPath = "/"
+	Hardware.DirPath = ""
 }
 
 // 获取CPU信息
@@ -45,8 +45,11 @@ func (h *hardware) CpuLoad() *load.AvgStat {
 
 // 获取硬盘状态
 func (h *hardware) DiskState() (diskFree uint64, diskUsed float64) {
+	if h.DirPath == "" {
+		h.DirPath = "/"
+	}
 
-	stat, err := disk.Usage(h.diskDirPath)
+	stat, err := disk.Usage(h.DirPath)
 	if err == nil {
 		diskFree = stat.Free
 		diskUsed = stat.UsedPercent
@@ -59,8 +62,11 @@ func (h *hardware) DiskState() (diskFree uint64, diskUsed float64) {
 
 // 获取硬盘已使用空间
 func (h *hardware) DiskFreeSpace() (diskFree uint64) {
+	if h.DirPath == "" {
+		h.DirPath = "/"
+	}
 
-	stat, err := disk.Usage(h.diskDirPath)
+	stat, err := disk.Usage(h.DirPath)
 	if err == nil {
 		diskFree = stat.Free
 		return
@@ -72,8 +78,11 @@ func (h *hardware) DiskFreeSpace() (diskFree uint64) {
 
 // 获取硬盘使用百分比
 func (h *hardware) DiskUsedPercent() (diskUsed float64) {
+	if h.DirPath == "" {
+		h.DirPath = "/"
+	}
 
-	stat, err := disk.Usage(h.diskDirPath)
+	stat, err := disk.Usage(h.DirPath)
 	if err == nil {
 		diskUsed = stat.UsedPercent
 		return
