@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"github.com/kavanahuang/log"
 	"os"
-	"time"
 )
 
 type terminal struct{}
