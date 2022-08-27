@@ -1,4 +1,4 @@
-package main
+package system
 
 import (
 	"bufio"
@@ -14,7 +14,7 @@ type terminal struct{}
 
 var Terminal = new(terminal)
 
-func (t *terminal) Call(exitCallback, execCallback func()) {
+func (t *terminal) Call(exitCallback func(), execCallback func(t []byte) bool) {
 	_, _ = fmt.Fprint(os.Stdout, ">> ")
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
@@ -29,7 +29,9 @@ func (t *terminal) Call(exitCallback, execCallback func()) {
 			break
 		}
 
-		execCallback()
+		if !execCallback(text) {
+			break
+		}
 		_, _ = fmt.Fprint(os.Stdout, ">> ")
 	}
 }
