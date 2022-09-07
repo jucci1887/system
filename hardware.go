@@ -7,7 +7,7 @@
 package system
 
 import (
-	"github.com/kavanahuang/log"
+	"github.com/kavanahuang/logs"
 	"github.com/shirou/gopsutil/v3/cpu"
 	"github.com/shirou/gopsutil/v3/disk"
 	"github.com/shirou/gopsutil/v3/load"
@@ -35,7 +35,7 @@ func init() {
 func (info *HardwareInfo) IsDiskFull(dir string) bool {
 	Hardware.DirPath = dir
 	if Hardware.DiskFreeSpace() < 10*1024*1024 {
-		log.Logs.Error("Disk is full.")
+		logs.Error("Disk is full.")
 		return true
 	}
 
@@ -77,7 +77,7 @@ func (info *HardwareInfo) CountGoroutine() int {
 func (info *HardwareInfo) CpuInfo() []cpu.InfoStat {
 	cpuInfo, err := cpu.Info()
 	if err != nil {
-		log.Logs.Error("Get cpu info error: ", err)
+		logs.Error("Get cpu info error: ", err)
 	}
 
 	return cpuInfo
@@ -87,7 +87,7 @@ func (info *HardwareInfo) CpuInfo() []cpu.InfoStat {
 func (info *HardwareInfo) CpuLoad() *load.AvgStat {
 	avg, err := load.Avg()
 	if err != nil {
-		log.Logs.Error("Get cpu load avg error: ", err)
+		logs.Error("Get cpu load avg error: ", err)
 	}
 	return avg
 }
@@ -105,7 +105,7 @@ func (info *HardwareInfo) DiskState() (diskFree uint64, diskUsed float64) {
 		return
 	}
 
-	log.Logs.Error("Get hard disk stat error: ", err)
+	logs.Error("Get hard disk stat error: ", err)
 	return
 }
 
@@ -121,7 +121,7 @@ func (info *HardwareInfo) DiskFreeSpace() (diskFree uint64) {
 		return
 	}
 
-	log.Logs.Error("Get hard disk free space error: ", err)
+	logs.Error("Get hard disk free space error: ", err)
 	return
 }
 
@@ -137,7 +137,7 @@ func (info *HardwareInfo) GetDiskUsedPercent() (diskUsed float64) {
 		return
 	}
 
-	log.Logs.Error("Get hard disk stat error: ", err)
+	logs.Error("Get hard disk stat error: ", err)
 	return
 }
 
@@ -150,6 +150,6 @@ func (info *HardwareInfo) RamUsed() (used float64) {
 		return
 	}
 
-	log.Logs.Error("Get memory usage error: ", err)
+	logs.Error("Get memory usage error: ", err)
 	return
 }

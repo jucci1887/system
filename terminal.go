@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
-	"github.com/kavanahuang/log"
+	"github.com/kavanahuang/logs"
 	"os"
 )
 
@@ -17,7 +17,7 @@ func (t *terminal) Call(exitCallback func(), execCallback func(t []byte) bool) {
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
 		if !scanner.Scan() {
-			log.Logs.Error("Scanner error: ", scanner.Err())
+			logs.Error("Scanner error: ", scanner.Err())
 			return
 		}
 

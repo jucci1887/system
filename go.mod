@@ -3,7 +3,7 @@ module github.com/kavanahuang/system
 go 1.18
 
 require (
-	github.com/kavanahuang/log v0.0.0-20220812103622-ad8af3a91296
+	github.com/kavanahuang/logs v0.0.0-20220830151853-944629158da5
 	github.com/shirou/gopsutil/v3 v3.22.7
 )
 

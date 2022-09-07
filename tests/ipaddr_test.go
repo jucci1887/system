@@ -18,7 +18,7 @@ func TestIpAddrStart(t *testing.T) {
 }
 
 func TestGetLocal(t *testing.T) {
-	msg := "192.168.1.136"
+	msg := "192.168.1.115"
 	result := system.IpAddr.GetLocal()
 
 	if result == msg {
@@ -29,7 +29,7 @@ func TestGetLocal(t *testing.T) {
 }
 
 func TestGetLocalReal(t *testing.T) {
-	msg := "192.168.1.136"
+	msg := "192.168.1.115"
 	result, _ := system.IpAddr.GetLocalReal()
 
 	if result == msg {

@@ -1,7 +1,7 @@
 package system
 
 import (
-	"github.com/kavanahuang/log"
+	"github.com/kavanahuang/logs"
 	"net"
 	"strings"
 )
@@ -14,7 +14,7 @@ var IpAddr = new(ipAddr)
 func (ia *ipAddr) GetLocal() string {
 	addr, err := net.InterfaceAddrs()
 	if err != nil {
-		log.Logs.Error("Get interface addr error: ", err)
+		logs.Error("Get interface addr error: ", err)
 	}
 
 	for _, address := range addr {
@@ -33,7 +33,7 @@ func (ia *ipAddr) GetLocal() string {
 func (ia *ipAddr) GetLocalReal() (ip string, err error) {
 	conn, err := net.Dial("udp", "8.8.8.8:53")
 	if err != nil {
-		log.Logs.Error("Connect 8.8.8.8:53 error: ", err)
+		logs.Error("Connect 8.8.8.8:53 error: ", err)
 		return
 	}
 
