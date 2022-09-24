@@ -1,9 +1,10 @@
-/*
- Author: Kernel.Huang
- Mail: kernelman79@gmail.com
- File: SystemService
- Date: 2021/3/23 2:38 AM
-*/
+/**
+ * Created by Kernel.Huang
+ * User: kernelman@live.com
+ * Date: 2021/3/23
+ * Time: 16:03
+ */
+
 package system
 
 import (

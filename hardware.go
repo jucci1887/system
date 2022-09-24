@@ -1,9 +1,10 @@
-/*
- Author: Kernel.Huang
- Mail: kernelman79@gmail.com
- File: hardware
- Date: 8/13/22 1:46 PM
-*/
+/**
+ * Created by Kernel.Huang
+ * User: kernelman@live.com
+ * Date: 2021/3/23
+ * Time: 16:03
+ */
+
 package system
 
 import (
