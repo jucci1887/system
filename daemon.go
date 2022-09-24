@@ -72,9 +72,9 @@ func (d *DaemonServices) Usage() {
 
 func (d *DaemonServices) msg() map[string]string {
 	return map[string]string{
-		"start": "       start	start FastKill service\n",
-		"stop": "       stop	stop FastKill service\n",
-		"restart": "       restart	restart FastKill service\n",
+		"start": "       start	start service\n",
+		"stop": "       stop	stop service\n",
+		"restart": "       restart	restart service\n",
 	}
 }
 
@@ -98,7 +98,7 @@ func (d *DaemonServices) Stop() bool {
 		return d.isStop(pid)
 	}
 
-	log.Println("FastKill stop success")
+	log.Println("Service stop success")
 	return true
 }
 
@@ -107,12 +107,12 @@ func (d *DaemonServices) isStop(pid int) bool {
 	if d.pidIsAlive(pid) {
 		err := syscall.Kill(pid, 9)
 		if err != nil {
-			log.Println("FastKill stop failed")
+			log.Println("Service stop failed")
 			return false
 		}
 	}
 
-	log.Println("FastKill stop success")
+	log.Println("Service stop success")
 	return true
 }
 
@@ -121,7 +121,7 @@ func (d *DaemonServices) run() bool {
 	pid := d.getPid()
 	if pid != 0 {
 		if d.pidIsAlive(pid) {
-			log.Println("FastKill start success")
+			log.Println("Service start success")
 			return true
 		}
 	}
@@ -132,7 +132,7 @@ func (d *DaemonServices) run() bool {
 
 	err := d.command.Start()
 	if err != nil {
-		log.Println("FastKill start failed")
+		log.Println("Service start failed")
 		return false
 
 	} else {
@@ -150,7 +150,7 @@ func (d *DaemonServices) isSetPid(pid int) {
 		if err != nil {
 			log.Println(err)
 		} else {
-			log.Println("FastKill start success")
+			log.Println("Service start success")
 		}
 	}
 }
