@@ -9,7 +9,7 @@
 package tests
 
 import (
-	"github.com/kavanahuang/system"
+	"github.com/jucci1887/system"
 	"testing"
 )
 

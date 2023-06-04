@@ -8,7 +8,7 @@
 package system
 
 import (
-	"github.com/kavanahuang/logs"
+	"github.com/jucci1887/logs"
 	"github.com/shirou/gopsutil/v3/cpu"
 	"github.com/shirou/gopsutil/v3/disk"
 	"github.com/shirou/gopsutil/v3/load"

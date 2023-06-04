@@ -11,7 +11,7 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
-	"github.com/kavanahuang/logs"
+	"github.com/jucci1887/logs"
 	"os"
 )
 

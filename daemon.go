@@ -10,7 +10,7 @@ package system
 import (
 	"errors"
 	"fmt"
-	"github.com/kavanahuang/common"
+	"github.com/jucci1887/common"
 	"log"
 	"os"
 	"os/exec"
@@ -72,8 +72,8 @@ func (d *DaemonServices) Usage() {
 
 func (d *DaemonServices) msg() map[string]string {
 	return map[string]string{
-		"start": "       start	start service\n",
-		"stop": "       stop	stop service\n",
+		"start":   "       start	start service\n",
+		"stop":    "       stop	stop service\n",
 		"restart": "       restart	restart service\n",
 	}
 }

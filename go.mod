@@ -1,10 +1,10 @@
-module github.com/kavanahuang/system
+module github.com/jucci1887/system
 
 go 1.18
 
 require (
-	github.com/kavanahuang/common v0.0.0-20220918120514-2597ad7d027f
-	github.com/kavanahuang/logs v0.0.0-20220830151853-944629158da5
+	github.com/jucci1887/common v0.0.0-20220918120514-2597ad7d027f
+	github.com/jucci1887/logs v0.0.0-20220830151853-944629158da5
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/shirou/gopsutil/v3 v3.22.7
 )

@@ -8,7 +8,7 @@
 package system
 
 import (
-	"github.com/kavanahuang/logs"
+	"github.com/jucci1887/logs"
 	"net"
 	"strings"
 )
