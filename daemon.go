@@ -1,19 +1,19 @@
 /**
- * Created by Kernel.Huang
- * User: kernelman@live.com
- * Date: 2021/3/23
+ * Created by Jesse
+ * User: jucci1887@gmail.com
+ * Date: 2023/6/5
  * Time: 16:03
  */
 
 package system
 
 import (
-	"errors"
 	"fmt"
 	"github.com/jucci1887/common"
 	"log"
 	"os"
 	"os/exec"
+	"sync"
 	"syscall"
 	"time"
 )
@@ -25,6 +25,7 @@ type DaemonServices struct {
 	ExecName string
 	PidDir   string
 	PidName  string
+	mutex    sync.Mutex
 }
 
 var Daemon = new(DaemonServices)
@@ -105,9 +106,17 @@ func (d *DaemonServices) Stop() bool {
 // 判断是否需要停止程序
 func (d *DaemonServices) isStop(pid int) bool {
 	if d.pidIsAlive(pid) {
-		err := syscall.Kill(pid, 9)
+		// 根据进程 PID 获取对应的 Process 对象
+		process, err := os.FindProcess(pid)
 		if err != nil {
-			log.Println("Service stop failed")
+			log.Printf("Error finding process with PID %d: %v\n\n", pid, err)
+			return false
+		}
+
+		// 向进程发送终止信号
+		err = process.Signal(os.Interrupt) // 或者使用 process.Signal(syscall.SIGTERM)
+		if err != nil {
+			log.Printf("Error sending signal to process with PID %d: %v\n", pid, err)
 			return false
 		}
 	}
@@ -155,26 +164,28 @@ func (d *DaemonServices) isSetPid(pid int) {
 	}
 }
 
-func (d *DaemonServices) setPid(nowPid int) (err error) {
+func (d *DaemonServices) setPid(nowPid int) error {
 	common.Files.Perm = 0755
 	pidPath := d.GetPidPath()
-	open := common.Files.Overwrite(pidPath)
-	defer func() { _ = open.Close() }()
 
-	err = syscall.Flock(int(open.Fd()), syscall.LOCK_EX)
+	// 创建文件
+	file, err := os.Create(pidPath)
 	if err != nil {
-		return
+		return fmt.Errorf("error creating pid file: %v", err)
 	}
+	defer func() { _ = file.Close() }()
+
+	// 加锁
+	d.mutex.Lock()
+	defer d.mutex.Unlock()
 
 	pidString := common.Format.FromInt(nowPid).ToString()
-	_, err = open.WriteString(pidString)
-
+	_, err = file.WriteString(pidString)
 	if err != nil {
-		err = errors.New("pid file write failed")
-		return
+		return fmt.Errorf("error writing to pid file: %v", err)
 	}
 
-	return
+	return nil
 }
 
 func (d *DaemonServices) getPid() int {
